@@ -44,7 +44,7 @@ npm run build
   * シーンごとにアクターを継承したクラスや、コンポーネントを継承したクラスを使って、ゲームを作成します。
 
 ### 基本的なクラスについて
-#### Actor
+#### [Actor](./src/bases/actor.ts)
 
 抽象クラスです。
 アクターは、複数のコンポーネントを持っています。
@@ -52,13 +52,13 @@ npm run build
 
 Actor を継承したクラスは、updateActor()メソッドを実装する必要があります。
 
-#### Component
+#### [Component](./src/bases/component.ts)
 
 抽象クラスです。
 継承したクラスは、update()メソッドを実装する必要があります。
 コンポーネントが他のコンポーネントを必要とする場合、アクターを経由してコンポーネントを取得します。
 
-### RendererComponent
+#### [RendererComponent](./src/components/renderer_component.ts)
 
 抽象クラスです。
 描画に関するコンポーネントは、このクラスを継承します。
