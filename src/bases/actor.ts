@@ -29,6 +29,7 @@ export abstract class Actor {
 
 	/**
    * アクターにコンポーネントを追加する
+   * このメソッドをオーバライドしてはいけない
    * @param component このアクターに追加したいコンポーネント
    */
 	addComponent(component: Component): void {

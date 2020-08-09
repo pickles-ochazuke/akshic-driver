@@ -1,13 +1,13 @@
-# typescript-game-sample
+# Akashic Driver
 
-**typescript-game-sample**はTypeScriptでAkashicのゲームを作る際のサンプルプロジェクトです。
+**akashic-driver** はAkashicで開発する複雑なゲームを簡単にするためのプロジェクトです。
 
 ## 利用方法
 
- `typescript-game-sample` を利用するにはNode.jsが必要です。
+ `akashic-driver` を利用するにはNode.jsが必要です。
 
 初回のみ、以下のコマンドを実行して、ビルドに必要なパッケージをインストールしてください。
-この作業は `typescript-game-sample` を新しく生成するごとに必要です。
+この作業は `akashic-driver` を新しく生成するごとに必要です。
 
 ```sh
 npm install
@@ -15,7 +15,7 @@ npm install
 
 ### ビルド方法
 
-`typescript-game-sample` はTypeScriptで書かれているため、以下のコマンドでJavaScriptファイルに変換する必要があります。
+通常のAkashicのTypeScriptプロジェクトと同様、 `akashic-driver` はTypeScriptで書かれているため、以下のコマンドでJavaScriptファイルに変換する必要があります。
 
 ```sh
 npm run build
@@ -33,66 +33,39 @@ npm run build
 
 * `npm install -g @akashic/akashic-sandbox` 後、 `akashic-sandbox .`
 
-### テンプレートの使い方
-#### typescript
-* `src/main.ts` を編集することでゲームの作成が可能です。
-  * スプライトの表示、音を鳴らす、タッチイベント定義等が、最初からこのテンプレートで行われています。
-
+### このプロジェクトの使い方
 #### typescript-minimal
 * `src/main.ts` を編集することでゲームの作成が可能です。
 * 基本的な使い方は typescript テンプレートと同じですが、このテンプレートでは最低限のものしか記述されていないため以下のことは行われていません。
   * スプライトの表示
   * 音を鳴らす
   * タッチイベント定義
+* このプロジェクト特有のクラスとして、Actor, Component や、それらを継承したRectActorやFilledRectComponentがあります。
+  * シーンごとにアクターを継承したクラスや、コンポーネントを継承したクラスを使って、ゲームを作成します。
 
-#### typescript-shin-ichiba-ranking
-* ゲーム部分を作成する場合は、 `src/main.ts` を編集してください。
-  * 基本的に`src/_bootstrap.ts`を編集する必要はありません。
-* 基本的な使い方は typescript テンプレートと同じですが、このテンプレートでは `src/main.ts` の `main` 関数の引数`param`に以下の値が新たに付与されています。
-  * `param.sessionParameter`: [セッションパラメーター](https://akashic-games.github.io/guide/ranking.html#session-parameters)
-  * `param.isAtsumaru`:コンテンツが動作している環境がRPGアツマール上かどうかを表すbool値
-* ランキングモードに対応したニコニコ新市場コンテンツの作り方の詳細については、[こちら](https://akashic-games.github.io/guide/ranking.html)を参照してください。
+### 基本的なクラスについて
+#### Actor
 
-### アセットの更新方法
+抽象クラスです。
+アクターは、複数のコンポーネントを持っています。
+継承先のアクタークラスやアクターが持っているコンポーネントの更新処理は、Actor.update()で呼ばれます。
 
-各種アセットを追加したい場合は、それぞれのアセットファイルを以下のディレクトリに格納します。
+Actor を継承したクラスは、updateActor()メソッドを実装する必要があります。
 
-* 画像アセット: `image`
-* スクリプトアセット: `script`
-* テキストアセット: `text`
-* オーディオアセット: `audio`
+#### Component
 
-これらのアセットを追加・変更したあとに `npm run update` をすると、アセットの変更内容をもとに `game.json` を書き換えることができます。
+抽象クラスです。
+継承したクラスは、update()メソッドを実装する必要があります。
+コンポーネントが他のコンポーネントを必要とする場合、アクターを経由してコンポーネントを取得します。
 
-### npm モジュールの追加・削除
+### RendererComponent
 
-`typescript-game-sample` でnpmモジュールを利用する場合、このディレクトリで `akashic install <package_name>` することで npm モジュールを追加することができます。
+抽象クラスです。
+描画に関するコンポーネントは、このクラスを継承します。
 
-また `akashic uninstall <package_name>` すると npm モジュールを削除することができます。
+update()メソッドとgenerate()メソッドを実装する必要があります。
+generate()メソッドは描画のためのエンティティを作成するメソッドです（開発者が実装する必要があります）。
 
-## エクスポート方法
+### その他
 
-`typescript-game-sample` をエクスポートするときは以下のコマンドを利用します。
-
-### htmlファイルのエクスポート
-
-`npm run export-html` のコマンドを利用することで `game` ディレクトリにエクスポートすることができます。
-
-`game/index.html` をブラウザで開くと単体動作させることができます。
-
-### zipファイルのエクスポート
-
-`npm run export-zip` のコマンドを利用することで `game.zip` という名前のzipファイルを出力できます。
-
-## テスト方法
-
-1. [TSLint](https://github.com/palantir/tslint "TSLint")を使ったLint
-2. [Jasmine](http://jasmine.github.io "Jasmine")を使ったテスト
-
-がそれぞれ実行されます。
-
-```sh
-npm test
-```
-
-テストコードのサンプルとして `spec/testSpec.js` を用意していますので参考にしてテストコードを記述して下さい。
+基本的な使い方は、公式のAkashicのプロジェクトと同じです。
