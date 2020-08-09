@@ -14,7 +14,7 @@ export abstract class Component {
 	}
 
 	/**
-   * updateメソッドは、登録しているアクターから呼び出される
-   */
+	 * updateメソッドは、登録しているアクターから呼び出される
+	 */
 	abstract update(): void;
 }

@@ -28,28 +28,28 @@ export abstract class Actor {
 	}
 
 	/**
-   * アクターにコンポーネントを追加する
-   * このメソッドをオーバライドしてはいけない
-   * @param component このアクターに追加したいコンポーネント
-   */
+	 * アクターにコンポーネントを追加する
+	 * このメソッドをオーバライドしてはいけない
+	 * @param component このアクターに追加したいコンポーネント
+	 */
 	addComponent(component: Component): void {
 		this.components.push(component);
 	}
 
 	/**
-   * 描画関係のコンポーネントは、このメソッドを使ってエンティティを登録する
-   * このメソッドをオーバライドしてはいけない
-   * @param e 追加するエンティティ
-   */
+	 * 描画関係のコンポーネントは、このメソッドを使ってエンティティを登録する
+	 * このメソッドをオーバライドしてはいけない
+	 * @param e 追加するエンティティ
+	 */
 	appendEntity(e: g.E): void {
 		this._entity.append(e);
 	}
 
 	/**
-   * アクターの更新処理を行う
-   * 登録されているコンポーネントの更新処理も呼び出す
-   * このメソッドはオーバライドしてはいけない
-   */
+	 * アクターの更新処理を行う
+	 * 登録されているコンポーネントの更新処理も呼び出す
+	 * このメソッドはオーバライドしてはいけない
+	 */
 	private update(): void {
 		this.updateComponents();
 		this.updateActor();
@@ -57,15 +57,15 @@ export abstract class Actor {
 	};
 
 	/**
-   * 登録されているコンポーネントを全て更新する
-   * このメソッドをオーバライドしてはいけない
-   */
+	 * 登録されているコンポーネントを全て更新する
+	 * このメソッドをオーバライドしてはいけない
+	 */
 	private updateComponents(): void {
 		this.components.forEach(component => component.update());
 	};
 
 	/**
-   * アクターが毎フレームで行うべき更新処理は、ここに実装する
-   */
+	 * アクターが毎フレームで行うべき更新処理は、ここに実装する
+	 */
 	abstract updateActor(): void;
 }

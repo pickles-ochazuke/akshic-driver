@@ -34,7 +34,8 @@ npm run build
 * `npm install -g @akashic/akashic-sandbox` 後、 `akashic-sandbox .`
 
 ### このプロジェクトの使い方
-#### typescript-minimal
+
+* ベースは typescript-minimal です。
 * `src/main.ts` を編集することでゲームの作成が可能です。
 * 基本的な使い方は typescript テンプレートと同じですが、このテンプレートでは最低限のものしか記述されていないため以下のことは行われていません。
   * スプライトの表示
