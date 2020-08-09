@@ -6,7 +6,7 @@ function main(param: g.GameMainParameterObject): void {
 
 	scene.loaded.add(() => {
 
-		const rectActor = new RectActor(scene);
+		new RectActor(scene);
 
 	});
 

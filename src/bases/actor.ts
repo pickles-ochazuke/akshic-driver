@@ -6,14 +6,17 @@ export abstract class Actor {
 	protected _entity: g.E;
 
 	// このアクターが登録されているシーン
-	get scene() {
+	private _scene: g.Scene;
+	get scene(): g.Scene {
 		return this._scene;
 	}
 
 	// このアクターに登録されているコンポーネントたち
-	components: Component[] = [];
+	private components: Component[] = [];
 
-	constructor(private _scene: g.Scene) {
+	constructor(scene: g.Scene) {
+		this._scene = scene;
+
 		// シーンに登録するために、必ず g.E のインスタンスが必要
 		this._entity = new g.E({ scene: this.scene });
 
@@ -30,6 +33,15 @@ export abstract class Actor {
    */
 	addComponent(component: Component): void {
 		this.components.push(component);
+	}
+
+	/**
+   * 描画関係のコンポーネントは、このメソッドを使ってエンティティを登録する
+   * このメソッドをオーバライドしてはいけない
+   * @param e 追加するエンティティ
+   */
+	appendEntity(e: g.E): void {
+		this._entity.append(e);
 	}
 
 	/**
@@ -50,15 +62,6 @@ export abstract class Actor {
 	private updateComponents(): void {
 		this.components.forEach(component => component.update());
 	};
-
-	/**
-   * 描画関係のコンポーネントは、このメソッドを使ってエンティティを登録する
-   * このメソッドをオーバライドしてはいけない
-   * @param e 追加するエンティティ
-   */
-	appendEntity(e: g.E) {
-		this._entity.append(e);
-	}
 
 	/**
    * アクターが毎フレームで行うべき更新処理は、ここに実装する

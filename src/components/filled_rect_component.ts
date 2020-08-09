@@ -8,6 +8,7 @@ export class FilledRectComponent extends RendererComponent {
 	}
 
 	update(): void {
+		// 何もしない
 	}
 
 	generate(): g.E {
